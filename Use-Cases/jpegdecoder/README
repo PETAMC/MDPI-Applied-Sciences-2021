@@ -1,0 +1,16 @@
+Code to print a macro-block to the screen
+The terminal&shell must support 24bit colors.
+
+for(int y=0; y<8; y++)
+{
+    printf("\t");
+    for(int x=0; x<8; x++)
+    {
+        int i;
+        i = y*8+x;
+        printf("\e[38;2;%d;%d;%dm", R[i], G[i], B[i]);
+        printf("██");
+    }
+    printf("\n");
+}
+
