@@ -1,3 +1,8 @@
 *.o
 *.so
+*.a
 *~
+SystemC Model/model
+Tools/pdfcompare2/pdfcompare
+Tools/pdfcompare2/pdfplot
+Tools/jpeg2c/jpegtranslator
