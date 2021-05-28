@@ -1,0 +1,7 @@
+This tool is used to generate a image.c file that can be moved to the JPEG Decode source directory.
+This file is a C representation of a JPEG file.
+
+1.: Build the JPEG translator tool by executing build.sh (clang needed)
+2.: Give a JPEG file as first argument to the JPEG translator tool.
+3.: The generated image.c can be used to replace the image.c of the JPEG decoder SDF implementation
+

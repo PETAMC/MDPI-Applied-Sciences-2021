@@ -1,0 +1,134 @@
+CONTACT
+▔▔▔▔▔▔▔
+Developed by Ralf Stemmer (ralf.stemmer@offis.de, ralf.stemmer@gmx.net (private))
+
+BUILDING
+▔▔▔▔▔▔▔▔
+The following packages need to be installed to be able to build pdfcompare and pdfplot.
+
+  • cairo
+  • cairomm
+  • freetype2
+  • fontconfig
+  • libconfig
+  • clang++ (that supports C++17)
+  • Adobe Source Sans Pro font
+
+When all dependencies are installed, simply execute the build.sh script:
+
+  ./build.sh
+
+
+INSTALLATION
+▔▔▔▔▔▔▔▔▔▔▔▔
+Execute the install.sh script with root privileges:
+
+  sudo ./install.sh
+
+Make sure that the path /usr/local/bin is inside the $PATH variable of your user.
+You can check this by execution the following line:
+
+  echo $PATH
+
+If there is no "/usr/local/bin" in the :-separated PATH list,
+add the path by adding the following line at the end of your shells configuration file.
+For bash (see "echo $SHELL") it in "~/.bashrc".
+
+  export PATH=$PATH:/usr/local/bin
+
+
+USAGE
+▔▔▔▔▔
+You an generate plots by calling pdfplot with two arguments:
+
+  • The configuration file describing the plot
+  • The output file (pdf file) the plot will be stored in
+
+There is one example configuration in the source directory: plot.cfg.
+To build the example plot, run
+
+  pdfplot ./testplot.cfg ./testplot.pdf
+
+To transcode the pdf to an svg Inkscape can be used as follows:
+
+  inkscape -o testplot.svg testplot.pdf
+
+For using pdfcompare, just give the paths to the two histograms to compare.
+No further configuration necessary.
+
+  pdfcompare ../measurements/example.txt ../simulation/example.txt
+
+
+CONFIGURATION
+▔▔▔▔▔▔▔▔▔▔▔▔▔
+The configuration file for pdfplot is using the libconfig parser.
+A detailed description of the syntax can be found under the following link:
+    
+    https://hyperrealm.github.io/libconfig/libconfig_manual.html#Configuration-Files
+
+pdfcompare2 uses a list of histogram-description and some scalar values to describe some plot settings.
+The data entry in the histograms description are mandatory, all other settings are optional.
+
+The histograms list is build like in the following example:
+
+
+  histograms = 
+  (
+      {
+          data = "data/sampels 1.txt"
+          label = "Measured";
+          color = "#20A040";
+      },
+      {
+          data = "data/samples 2.txt
+          label = "Simulated";
+          color = "#2040E0";
+      }
+  );
+
+
+The number of histograms in the histograms-list is not limited.
+Each histogram entry (within {}) must contain the following settings:
+
+  • data:  A string containing the path to the samples to use for the histogram (list of integers).
+  • label: A label to identify the data in the plot. This label is used for the legend of the plot.
+           Default: "Data"
+  • color: A color that is used to unify the data. This color will be used for the histogram (with alpha=50%)
+           and for markers that highlight the average and maximum value.
+           The color used the HTML hex-notation for colors (#RRGGBB).
+           Default: "#808080"
+
+Beside the histograms list there are the following settings as shown in the following example:
+
+  alignbins   = true;
+  drawmax     = true;
+  drawavg     = true;
+  xaxislabel  = "Iteration Duration [Cycles]";
+  yaxislabel  = "Probability";
+  pagewidth   = 13.5;
+  pageheight  = 8.0;
+  legendpos   = "left";
+
+They have the following purpose:
+
+  • alignbins:  A boolean value to enforce to use the same bin configuration for all histograms.
+                This is one of the key features compared to the old pdfcompare.py tool.
+                Default: false
+  • drawmax:    When true, the vertical line highlighting the highest value in the samples will be added to the plot.
+                Default: false
+  • drawavg:    When true, the vertical dashed line highlighting the average value will be added to the plot.
+                Default: false
+  • xaxislabel: Label for the X-axis;
+                Default: "Values"
+  • yaxislabel: Label for the Y-axis;
+                Default: "Probability"
+  • pagewidth:  Define the width of the created pdf file in cm.
+                Default: 13.5 (recommended for double column documents)
+  • pageheight: Define the height of the created pdf file in cm.
+                Default: 8.0
+  • legendpos:  Position of the legend. Valid parameters are "left", "center", "right"
+                Default: "left"
+
+
+
+
