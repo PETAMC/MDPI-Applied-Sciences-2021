@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<experiment platform="PlatformV2" application="jpeg">
+    <application>
+        <code>apps/jpeg.so</code>
+        <data>apps/jpegdata.so</data>
+    </application>
+    <models>
+        <computation functional="false">gaussian distribution</computation>
+        <communication>message level</communication>
+    </models>
+    <mapping>
+        <actors>
+            <tile name="MB0">
+                <actor>GetEncodedImageBlock</actor>
+                <actor>IQ_Y</actor>
+                <actor>IQ_Cr</actor>
+                <actor>IQ_Cb</actor>
+                <actor>IDCT_Y</actor>
+                <actor>IDCT_Cr</actor>
+                <actor>IDCT_Cb</actor>
+                <actor>CreateRGBPixels</actor>
+            </tile>
+        </actors>
+        <channels>
+            <memory name="SharedMemory">
+                <channel>ch_dcoffset</channel>
+                <channel>ch_ency</channel>
+                <channel>ch_enccr</channel>
+                <channel>ch_enccb</channel>
+                <channel>ch_prepy</channel>
+                <channel>ch_prepcr</channel>
+                <channel>ch_prepcb</channel>
+                <channel>ch_y</channel>
+                <channel>ch_cr</channel>
+                <channel>ch_cb</channel>
+            </memory>
+        </channels>
+    </mapping>
+</experiment>
+
