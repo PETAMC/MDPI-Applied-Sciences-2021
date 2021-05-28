@@ -2,6 +2,7 @@
 *.so
 *.a
 *~
+__pycache__
 SystemC Model/model
 Tools/pdfcompare2/pdfcompare
 Tools/pdfcompare2/pdfplot
