@@ -1,0 +1,24 @@
+The sub-directory tell to which memory the actors were mapped:
+    - "bram": Private BRAM memory
+    - "ddr":  Shared DDR memory without cache
+    - "ddr+cache":  Shared DDR memory with cache
+
+The file names follow the following naming scheme:
+
+ActorName[-TileType].txt
+
+Actor Name will be the name of the C-Function as also listed in the system.ini->[system]->actors list.
+
+Tile Type will be 
+    nothing for a microblaze without special features
+    "-ef" for extended FPU
+    "-ea" for extended ALU (HW Mult./Div.)
+
+Example:
+
+    InverseQuantization_Cr-ea.txt
+    IDCT_Y-ef.txt
+    GetEncodedImageBlock.txt
+    
+In the directory with the timing values, there is also a .jpg and .c file of the input image used for the characterization.
+
